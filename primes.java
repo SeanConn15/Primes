@@ -7,9 +7,8 @@ static int certainty = 100; //higher number means higher runtime
 
 public static boolean isPrime(BigInteger b, int size)
 {
-	//basic Miller Robinson
+	//basic Miller Robinson is the mathmatical proof that this function implements
 	BigInteger alpha;
-	// 
 	BigInteger c = b.subtract(BigInteger.valueOf(1));
 	
 	for (int i = 1; i < certainty; i++)
@@ -24,10 +23,16 @@ public static boolean isPrime(BigInteger b, int size)
 }
 public static BigInteger genPrime(int size)
 {
-	//lower bound becomes 2^n-1 aka the largest bit
+	////generates a random n-bit number (in the range [2^(n-1), 2^(n) -1]
+	////then checks to see if it is prime
+
+	//final number = minumum number size + random variance
+
+	//minimum number (2^(n-1))
 	BigInteger bound = new BigInteger("2");
 	bound = bound.pow(size - 1);
 	
+	//random variance
 	while(true)
 	{
 		//generates the n - 1 lowest bits of the number
@@ -41,6 +46,7 @@ public static BigInteger genPrime(int size)
 			return test;
 		
 		//generate again if it fails
+		//there is garanteed to a prime in this range (see density of primes) so this wont run forever
 	}
 }
 public static void main(String[] args) {
